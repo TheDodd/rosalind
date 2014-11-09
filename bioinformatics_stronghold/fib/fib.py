@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Template for processing DNA & RNA data sets."""
+"""Given positive integers n≤40 and k≤5.
+
+Return the total number of rabbit pairs that will be present after n months if
+we begin with 1 pair and in each generation, every pair of reproduction-age
+rabbits produces a litter of k rabbit pairs — and the rabbits never die.
+"""
 import argparse
 import logging
 import os
@@ -68,7 +73,25 @@ def valid_file(path):
 
 def main(args):
     """Main routine."""
-    pass
+    # Get the contents of the given file.
+    file = open(args.file)
+    content = file.read().strip()
+    LOG.debug('Data set:\n{}'.format(content))
+
+    # Break down given data set.
+    months, yld = content.split()
+    months = int(months)
+    yld = int(yld)
+    LOG.debug('Data set:\nmonths = {}\nyield = {}'.format(months, yld))
+
+    pairs = 0
+    babies = 1
+    for _ in range(months - 1 if months > 0 else 0):
+        monthly_yield = pairs * yld
+        pairs += babies
+        babies = monthly_yield
+
+    print(pairs + babies)
 
 
 if __name__ == '__main__':

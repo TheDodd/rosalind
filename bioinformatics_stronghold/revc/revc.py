@@ -5,7 +5,6 @@ import array
 import logging
 import os
 
-# Root logger.
 LOG = logging.getLogger()
 
 
@@ -13,7 +12,6 @@ class EnableVerbosity(argparse.Action):
     """Action class to enable verbosity when requested."""
 
     def __call__(self, parser, namespace, value, option_string):
-        # Get the root logger.
         logger = logging.getLogger()
         logger.setLevel(logging.DEBUG)
         logger.debug('Verbosity enabled.')
