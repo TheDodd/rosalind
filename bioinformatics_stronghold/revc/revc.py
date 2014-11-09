@@ -19,8 +19,9 @@ class EnableVerbosity(argparse.Action):
         logger.debug('Verbosity enabled.')
 
 
-def configure_stream_logger(logger):
-    """Configure stream handler logging."""
+def configure_stream_logger():
+    """Configure stream handler for root logger."""
+    logger = logging.getLogger()
     stream_handler = logging.StreamHandler()
     logger.addHandler(stream_handler)
     logger.setLevel(logging.INFO)
@@ -96,6 +97,6 @@ def main(args):
 
 
 if __name__ == '__main__':
-    configure_stream_logger(LOG)
+    configure_stream_logger()
     args = parse_args()
     main(args)
