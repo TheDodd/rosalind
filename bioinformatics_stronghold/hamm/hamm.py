@@ -68,7 +68,22 @@ def valid_file(path):
 
 def main(args):
     """Main routine."""
-    pass
+    file = open(args.file)
+    content = file.read().strip()
+
+    LOG.debug('Content:\n{}'.format(content))
+
+    # Get both strings to calculate Hamming distance.
+    string1, string2 = content.split('\n')
+
+    LOG.debug('Lines:\n{}\n{}'.format(string1, string2))
+
+    distance = 0
+    for char1, char2 in zip(string1, string2):
+        if char1 != char2:
+            distance += 1
+
+    print(distance)
 
 
 if __name__ == '__main__':
